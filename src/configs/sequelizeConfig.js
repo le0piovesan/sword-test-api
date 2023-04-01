@@ -1,6 +1,6 @@
 const Sequelize = require("sequelize");
 require("dotenv").config({ path: "src/configs/.env" });
-const connection = require("./mysqlConfig");
+const connection = require("./sequelize.mysql2Config");
 const { init } = require("../database/init");
 
 connection.query(init.createDb, (error, results) => {

@@ -11,33 +11,33 @@ exports.init = {
   createTables: {
     manager: `
       CREATE TABLE IF NOT EXISTS manager(
-          idManager INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
+          id INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
           name VARCHAR(80) NOT NULL,
           company CHAR(30) NOT NULL,
-          createdAt TIMESTAMP NOT NULL,
-          updatedAt TIMESTAMP NOT NULL,
+          createdAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+          updatedAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP
       );
       `,
     technician: `
       CREATE TABLE IF NOT EXISTS technician(
-          idTechnician INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
+          id INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
           name VARCHAR(80) NOT NULL,
           field CHAR(30) NOT NULL,
-          createdAt TIMESTAMP NOT NULL,
-          updatedAt TIMESTAMP NOT NULL,
+          createdAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+          updatedAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
           idManager INT NOT NULL,
-          CONSTRAINT technician_manager FOREIGN KEY(idManager) REFERENCES manager(idManager)
+          CONSTRAINT technician_manager FOREIGN KEY(idManager) REFERENCES manager(id)
       );
       `,
     task: `
       CREATE TABLE IF NOT EXISTS task(
-          idTask INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
+          id INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
           summary VARCHAR(2500) NOT NULL,
           performed DATE NOT NULL,
-          createdAt TIMESTAMP NOT NULL,
-          updatedAt TIMESTAMP NOT NULL,
+          createdAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+          updatedAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
           idTechnician INT NOT NULL,
-          CONSTRAINT manager_technician FOREIGN KEY(idTechnician) REFERENCES technician(idTechnician)
+          CONSTRAINT task_technician FOREIGN KEY(idTechnician) REFERENCES technician(id)
       );
       `,
   },

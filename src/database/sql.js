@@ -4,14 +4,7 @@ exports.sql = {
   `,
   createManager(name, company) {
     const query = `
-      INSERT INTO manager(
-          name,
-          company,
-          createdAt,
-          updatedAt
-      ) VALUES (
-          ${name}, ${company}, ${Date.now()}, ${Date.now()}
-      )
+      INSERT INTO manager(name, company) VALUES ("${name}", "${company}");
     `;
 
     return query;

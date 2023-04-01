@@ -1,25 +1,24 @@
 const { responseSuccess, responseError } = require("../utils/response");
-// const { connection } = require("../configs/configDb.js");
-// const { sql } = require("../database/sql");
-const { Manager } = require("../models/Manager");
-const { Technician } = require("../models/Technician");
-const { Task } = require("../models/Task");
+const { connection } = require("../configs/mysqlConfig");
+const { sql } = require("../database/sql");
 
 class ControllerManager {
+  // General functions
+
   async listManager(req, res) {
-    // connection.query(sql.selectManagers, (error, results) => {
-    //   if (error) return responseError(res, error);
-    //   else responseSuccess(res, results);
-    // });
+    connection.query(sql.selectManagers, (error, results) => {
+      if (error) return responseError(res, error);
+      else responseSuccess(res, results);
+    });
   }
 
   async createManager(req, res) {
-    const { name, company } = req.params;
+    const { name, company } = req.body;
 
-    // connection.query(sql.createManager(name, company), (error, results) => {
-    //   if (error) return responseError(res, error);
-    //   else responseSuccess(res, results, 201);
-    // });
+    connection.query(sql.createManager(name, company), (error, results) => {
+      if (error) return responseError(res, error);
+      else responseSuccess(res, results, 201);
+    });
   }
 }
 
