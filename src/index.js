@@ -6,4 +6,4 @@ const app = express();
 app.use(routes);
 app.use(express.json());
 
-app.listen(port, () => console.log("api running"));
+app.listen(port, () => console.log("api running on port", port));

@@ -1,6 +1,6 @@
 exports.sql = {
   selectManagers: `
-    SELECT * FROM manager ORDER BY created_at;
+    SELECT * FROM manager ORDER BY createdAt;
   `,
   createManager(name, company) {
     const query = `
