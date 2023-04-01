@@ -1,0 +1,13 @@
+CREATE DATABASE IF NOT EXISTS tasksdb;
+USE tasksdb;
+
+DROP TABLE IF EXISTS manager;
+
+CREATE TABLE manager(
+    id INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
+    name VARCHAR(80) NOT NULL,
+    company CHAR(30) NOT NULL,
+    field CHAR(30) NOT NULL,
+    created_at TIMESTAMP NOT NULL,
+    updated_at TIMESTAMP NOT NULL
+);
