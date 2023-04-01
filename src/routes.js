@@ -1,13 +1,14 @@
 const routes = require("express").Router();
 const ControllerManager = require("./controllers/controllerManager");
-const controllerTechnician = require("./controllers/controllerTechnician");
+const ControllerTechnician = require("./controllers/controllerTechnician");
+const ControllerTask = require("./controllers/controllerTask");
 
-// POST creation
+// Admin sample routes
 routes.post("/manager", ControllerManager.createManager);
-routes.post("/technician");
-
-// GET read all
-routes.get("/manager", ControllerManager.listManager);
-routes.get("/technician");
+routes.post("/technician", ControllerTechnician.createTechnician);
+routes.post("/task", ControllerTask.createTask);
+routes.get("/manager", ControllerManager.listAllManagers);
+routes.get("/technician", ControllerTechnician.listAllTechnicians);
+routes.get("/task", ControllerTask.listAllTasks);
 
 module.exports.routes = routes;

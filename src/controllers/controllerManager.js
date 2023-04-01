@@ -3,10 +3,10 @@ const { connection } = require("../configs/mysqlConfig");
 const { sql } = require("../database/sql");
 
 class ControllerManager {
-  // General functions
+  // Admin sample functions
 
-  async listManager(req, res) {
-    connection.query(sql.selectManagers, (error, results) => {
+  async listAllManagers(req, res) {
+    connection.query(sql.admin.selectAllManagers, (error, results) => {
       if (error) return responseError(res, error);
       else responseSuccess(res, results);
     });
@@ -15,10 +15,13 @@ class ControllerManager {
   async createManager(req, res) {
     const { name, company } = req.body;
 
-    connection.query(sql.createManager(name, company), (error, results) => {
-      if (error) return responseError(res, error);
-      else responseSuccess(res, results, 201);
-    });
+    connection.query(
+      sql.admin.createManager(name, company),
+      (error, results) => {
+        if (error) return responseError(res, error);
+        else responseSuccess(res, results, 201);
+      }
+    );
   }
 }
 

@@ -25,7 +25,7 @@ exports.init = {
           field CHAR(30) NOT NULL,
           createdAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
           updatedAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-          idManager INT NOT NULL,
+          idManager INT DEFAULT NULL,
           CONSTRAINT technician_manager FOREIGN KEY(idManager) REFERENCES manager(id)
       );
       `,
@@ -36,7 +36,7 @@ exports.init = {
           performed DATE NOT NULL,
           createdAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
           updatedAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-          idTechnician INT NOT NULL,
+          idTechnician INT DEFAULT NULL,
           CONSTRAINT task_technician FOREIGN KEY(idTechnician) REFERENCES technician(id)
       );
       `,
