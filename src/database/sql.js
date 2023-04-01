@@ -1,4 +1,17 @@
 exports.sql = {
+  manager: {
+    getTechnicianTasks(id) {
+      const query = `
+      SELECT DISTINCT ta.summary, ta.performed, te.name, te.field, ma.company from task ta
+      JOIN technician te ON ta.idTechnician = te.id
+      JOIN manager ma ON te.idManager = ma.id
+      WHERE ma.id = ${id}
+      ORDER BY ta.performed DESC
+      `;
+      return query;
+    },
+  },
+
   admin: {
     selectAllManagers: `
     SELECT * FROM manager ORDER BY createdAt;

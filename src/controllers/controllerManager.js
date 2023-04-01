@@ -3,10 +3,24 @@ const { connection } = require("../configs/mysqlConfig");
 const { sql } = require("../database/sql");
 
 class ControllerManager {
+  //The manager can see tasks from all the technicians, delete them, and should be notified when some tech performs a task
+
+  async getTechnicianTasks(req, res) {
+    const { id } = req.params;
+
+    await connection.query(
+      sql.manager.getTechnicianTasks(id),
+      (error, results) => {
+        if (error) return responseError(res, error);
+        else responseSuccess(res, results);
+      }
+    );
+  }
+
   // Admin sample functions
 
   async listAllManagers(req, res) {
-    connection.query(sql.admin.selectAllManagers, (error, results) => {
+    await connection.query(sql.admin.selectAllManagers, (error, results) => {
       if (error) return responseError(res, error);
       else responseSuccess(res, results);
     });
@@ -15,7 +29,7 @@ class ControllerManager {
   async createManager(req, res) {
     const { name, company } = req.body;
 
-    connection.query(
+    await connection.query(
       sql.admin.createManager(name, company),
       (error, results) => {
         if (error) return responseError(res, error);

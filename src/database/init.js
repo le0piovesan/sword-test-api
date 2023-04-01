@@ -41,4 +41,31 @@ exports.init = {
       );
       `,
   },
+  fillTables: {
+    manager: `
+    INSERT INTO manager(name, company) 
+    VALUES("James", "Tech Systems"), 
+          ("Maria", "Maria Accountment"),
+          ("Frank", "Well Repaired");
+    `,
+    technician: `
+    INSERT INTO technician(name, field, idManager) 
+    VALUES("Jessica", "Secretary", 2), 
+          ("Rick", "Accountment Helper", 2),
+          ("Anna", "Software Engineer", 1),
+          ("Julia", "Handyman", 3),
+          ("Bob", "Finances", 1);
+    `,
+    task: `
+    INSERT INTO task(summary, performed, idTechnician) 
+    VALUES("Organize files, make some calls", "2023-03-21", 1), 
+          ("Gathered software requirements", "2023-01-07", 3), 
+          ("Developed a backend api", "2023-01-29", 3), 
+          ("Designed a frontend web app", "2023-02-14", 3), 
+          ("Repaired some home equipaments", "2023-03-02", 4), 
+          ("Fixed a closet", "2023-03-05", 4), 
+          ("Made a excel file with recent earns", "2023-03-14", 5), 
+          ("Helped reorganizing some files", "2023-03-21", 2);
+    `,
+  },
 };

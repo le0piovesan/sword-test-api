@@ -10,21 +10,20 @@ const connection = mysql.createConnection({
 
 connection.query(init.createDb, (error, results) => {
   if (error) throw error;
-  else
-    connection.query(init.useDb, (error, results) => {
+  connection.query(init.useDb, () => {
+    connection.query(init.createTables.manager, (error, results) => {
       if (error) throw error;
-      else {
-        connection.query(init.createTables.manager, (error, results) => {
-          if (error) throw error;
-        });
-        connection.query(init.createTables.technician, (error, results) => {
-          if (error) throw error;
-        });
-        connection.query(init.createTables.task, (error, results) => {
-          if (error) throw error;
-        });
-      }
+      connection.query(init.fillTables.manager);
     });
+    connection.query(init.createTables.technician, (error, results) => {
+      if (error) throw error;
+      connection.query(init.fillTables.technician);
+    });
+    connection.query(init.createTables.task, (error, results) => {
+      if (error) throw error;
+      connection.query(init.fillTables.task);
+    });
+  });
 });
 
 module.exports.connection = connection;

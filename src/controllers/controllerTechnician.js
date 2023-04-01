@@ -6,7 +6,7 @@ class ControllerTechnician {
   // Admin sample functions
 
   async listAllTechnicians(req, res) {
-    connection.query(sql.admin.selectAllTechnicians, (error, results) => {
+    await connection.query(sql.admin.selectAllTechnicians, (error, results) => {
       if (error) return responseError(res, error);
       else responseSuccess(res, results);
     });
@@ -15,7 +15,7 @@ class ControllerTechnician {
   async createTechnician(req, res) {
     const { name, field, idManager = 1 } = req.body;
 
-    connection.query(
+    await connection.query(
       sql.admin.createTechnician(name, field, idManager),
       (error, results) => {
         if (error) return responseError(res, error);
