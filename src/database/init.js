@@ -10,7 +10,7 @@ exports.init = {
     `,
   createTables: {
     task: `
-        CREATE TABLE task(
+        CREATE TABLE IF NOT EXISTS task(
             idTask INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
             summary VARCHAR(2500) NOT NULL,
             performed DATE NOT NULL,
@@ -19,7 +19,7 @@ exports.init = {
         );
         `,
     technician: `
-        CREATE TABLE technician(
+        CREATE TABLE IF NOT EXISTS technician(
             idTechnician INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
             name VARCHAR(80) NOT NULL,
             field CHAR(30) NOT NULL,
@@ -30,7 +30,7 @@ exports.init = {
         );
         `,
     manager: `
-        CREATE TABLE manager(
+        CREATE TABLE IF NOT EXISTS manager(
             idManager INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
             name VARCHAR(80) NOT NULL,
             company CHAR(30) NOT NULL,
