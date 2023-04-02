@@ -7,8 +7,8 @@ const ControllerTask = require("./controllers/controllerTask");
 // The manager can see tasks from all the technicians and delete them
 
 routes.get(
-  "/manager/:id/getTechnicianTasks/",
-  ControllerManager.getTechnicianTasks
+  "/manager/:id/getAllTechniciansTasks/",
+  ControllerManager.getAllTechniciansTasks
 );
 routes.delete(
   "/technician/:idTechnician/task/:idTask/deleteTechnicianTask",
@@ -26,7 +26,7 @@ routes.delete(
 //   ControllerTechnician.updateTask
 // );
 
-// Admin sample routes
+// Admin sample routes for TESTING
 routes.post("/manager", ControllerManager.createManager);
 routes.post("/technician", ControllerTechnician.createTechnician);
 routes.post("/task", ControllerTask.createTask);

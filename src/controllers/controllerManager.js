@@ -3,11 +3,11 @@ const { connection } = require("../configs/mysqlConfig");
 const { sql } = require("../database/sql");
 
 class ControllerManager {
-  async getTechnicianTasks(req, res) {
+  async getAllTechniciansTasks(req, res) {
     const { id } = req.params;
 
     await connection.query(
-      sql.manager.getTechnicianTasks(id),
+      sql.manager.getAllTechniciansTasks(id),
       (error, results) => {
         if (error) return responseError(res, error);
         else responseSuccess(res, results);

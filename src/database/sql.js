@@ -1,6 +1,6 @@
 exports.sql = {
   manager: {
-    getTechnicianTasks(id) {
+    getAllTechniciansTasks(id) {
       const query = `
       SELECT DISTINCT ta.id AS idTask, ta.summary, ta.performed, te.id AS idTechnician, te.name, te.field, ma.company from task ta
       JOIN technician te ON ta.idTechnician = te.id
