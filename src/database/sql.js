@@ -2,18 +2,19 @@ exports.sql = {
   manager: {
     getTechnicianTasks(id) {
       const query = `
-      SELECT DISTINCT ta.summary, ta.performed, te.name, te.field, ma.company from task ta
+      SELECT DISTINCT ta.id AS idTask, ta.summary, ta.performed, te.id AS idTechnician, te.name, te.field, ma.company from task ta
       JOIN technician te ON ta.idTechnician = te.id
       JOIN manager ma ON te.idManager = ma.id
       WHERE ma.id = ${id}
-      ORDER BY ta.performed DESC
+      ORDER BY ta.performed DESC;
       `;
       return query;
     },
-    deleteTechnician(id) {
+    deleteTechnicianTask(idTechnician, idTask) {
       const query = `
-      DELETE FROM technician
-      WHERE id = ${id}
+      DELETE ta FROM task ta
+      JOIN technician te ON ta.idTechnician = te.id
+      WHERE te.id = ${idTechnician} AND ta.id = ${idTask};
       `;
       return query;
     },

@@ -4,12 +4,27 @@ const ControllerTechnician = require("./controllers/controllerTechnician");
 const ControllerTask = require("./controllers/controllerTask");
 
 // Manager routes
-//  The manager can see tasks from all the technicians, delete them, and should be notified when some tech performs a task
+// The manager can see tasks from all the technicians and delete them
+
 routes.get(
-  "/manager/getTechnicianTasks/:id",
+  "/manager/:id/getTechnicianTasks/",
   ControllerManager.getTechnicianTasks
 );
-routes.delete("/manager/technician/:id", ControllerManager.deleteTechnician);
+routes.delete(
+  "/technician/:idTechnician/task/:idTask/deleteTechnicianTask",
+  ControllerManager.deleteTechnicianTask
+);
+
+// Technician/Task routes
+// The technician performs tasks and is only able to see, create or update his own performed tasks
+// Manager should be notified when some tech performs a task
+
+// routes.get("/technician/:id/getTasks/", ControllerTechnician.getTasks);
+// routes.post("/technician/:id/createTask/", ControllerTechnician.createTask);
+// routes.put(
+//   "/technician/:id/updateTask/:idTask",
+//   ControllerTechnician.updateTask
+// );
 
 // Admin sample routes
 routes.post("/manager", ControllerManager.createManager);

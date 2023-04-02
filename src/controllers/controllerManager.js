@@ -3,8 +3,6 @@ const { connection } = require("../configs/mysqlConfig");
 const { sql } = require("../database/sql");
 
 class ControllerManager {
-  //The manager can see tasks from all the technicians, delete them, and should be notified when some tech performs a task
-
   async getTechnicianTasks(req, res) {
     const { id } = req.params;
 
@@ -17,14 +15,14 @@ class ControllerManager {
     );
   }
 
-  async deleteTechnician(req, res) {
-    const { id } = req.params;
+  async deleteTechnicianTask(req, res) {
+    const { idTechnician, idTask } = req.params;
 
     await connection.query(
-      sql.manager.deleteTechnician(id),
+      sql.manager.deleteTechnicianTask(idTechnician, idTask),
       (error, results) => {
         if (error) return responseError(res, error);
-        else responseSuccess(res, `Technician with id ${id} deleted`);
+        else responseSuccess(res, `Task with id ${idTask} deleted`);
       }
     );
   }
