@@ -25,6 +25,23 @@ class ControllerTechnician {
     );
   }
 
+  async updateTask(req, res) {
+    const { idTechnician, idTask } = req.params;
+    const { summary, performed } = req.body;
+
+    await connection.query(
+      sql.technician.updateTask(idTechnician, idTask, summary, performed),
+      (error, results) => {
+        if (error) return responseError(res, error);
+        else
+          responseSuccess(
+            res,
+            `Task ${idTask} updated for technician ${idTechnician}`
+          );
+      }
+    );
+  }
+
   // Admin sample functions
 
   async listAllTechnicians(req, res) {

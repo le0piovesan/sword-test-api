@@ -21,10 +21,10 @@ routes.delete(
 
 routes.get("/technician/:id/getTasks/", ControllerTechnician.getTasks);
 routes.post("/technician/:id/createTask/", ControllerTechnician.createTask);
-// routes.put(
-//   "/technician/:idTechnician/task/:idTask/updateTask/",
-//   ControllerTechnician.updateTask
-// );
+routes.put(
+  "/technician/:idTechnician/task/:idTask/updateTask/",
+  ControllerTechnician.updateTask
+);
 
 // Admin sample routes for TESTING
 routes.post("/manager", ControllerManager.createManager);

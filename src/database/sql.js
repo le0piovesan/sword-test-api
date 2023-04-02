@@ -34,6 +34,13 @@ exports.sql = {
       `;
       return query;
     },
+    updateTask(idTechnician, idTask, summary, performed) {
+      const query = `
+      UPDATE task SET summary = "${summary}", performed = "${performed}", updatedAt = CURRENT_TIMESTAMP 
+      WHERE idTechnician = ${idTechnician} AND id = ${idTask};
+      `;
+      return query;
+    },
   },
 
   admin: {
