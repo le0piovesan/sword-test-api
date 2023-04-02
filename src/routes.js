@@ -19,10 +19,10 @@ routes.delete(
 // The technician performs tasks and is only able to see, create or update his own performed tasks
 // Manager should be notified when some tech performs a task
 
-// routes.get("/technician/:id/getTasks/", ControllerTechnician.getTasks);
+routes.get("/technician/:id/getTasks/", ControllerTechnician.getTasks);
 // routes.post("/technician/:id/createTask/", ControllerTechnician.createTask);
 // routes.put(
-//   "/technician/:id/updateTask/:idTask",
+//   "/technician/:idTechnician/task/:idTask/updateTask/",
 //   ControllerTechnician.updateTask
 // );
 

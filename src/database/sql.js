@@ -19,6 +19,15 @@ exports.sql = {
       return query;
     },
   },
+  technician: {
+    getTasks(id) {
+      const query = `
+      SELECT * FROM task
+      WHERE idTechnician = ${id};
+      `;
+      return query;
+    },
+  },
 
   admin: {
     selectAllManagers: `
