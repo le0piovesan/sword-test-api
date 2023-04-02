@@ -11,7 +11,6 @@ const connection = mysql.createConnection({
 connection.query(init.createDb, (error, results) => {
   if (error) throw error;
   connection.query(init.useDb, () => {
-    connection.query(init.config);
     connection.query(init.createTables.manager, (error, results) => {
       if (error) throw error;
       connection.query(init.fillTables.manager);
