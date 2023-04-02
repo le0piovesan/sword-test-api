@@ -20,7 +20,7 @@ routes.delete(
 // Manager should be notified when some tech performs a task
 
 routes.get("/technician/:id/getTasks/", ControllerTechnician.getTasks);
-// routes.post("/technician/:id/createTask/", ControllerTechnician.createTask);
+routes.post("/technician/:id/createTask/", ControllerTechnician.createTask);
 // routes.put(
 //   "/technician/:idTechnician/task/:idTask/updateTask/",
 //   ControllerTechnician.updateTask

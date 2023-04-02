@@ -12,6 +12,19 @@ class ControllerTechnician {
     });
   }
 
+  async createTask(req, res) {
+    const { id } = req.params;
+    const { summary, performed } = req.body;
+
+    await connection.query(
+      sql.technician.createTask(summary, performed, id),
+      (error, results) => {
+        if (error) return responseError(res, error);
+        else responseSuccess(res, `Task created for technician ${id}`);
+      }
+    );
+  }
+
   // Admin sample functions
 
   async listAllTechnicians(req, res) {

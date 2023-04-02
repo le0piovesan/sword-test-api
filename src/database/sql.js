@@ -27,6 +27,13 @@ exports.sql = {
       `;
       return query;
     },
+    createTask(summary, performed, id) {
+      const query = `
+      INSERT INTO task(summary, performed, idTechnician) 
+      VALUES("${summary}", "${performed}", ${id});
+      `;
+      return query;
+    },
   },
 
   admin: {
