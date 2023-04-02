@@ -8,6 +8,9 @@ exports.init = {
   useDb: `
     USE tasksdb;
     `,
+  config: `
+    SET FOREIGN_KEY_CHECKS=0;
+    `,
   createTables: {
     manager: `
       CREATE TABLE IF NOT EXISTS manager(

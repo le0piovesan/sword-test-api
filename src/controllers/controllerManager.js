@@ -17,6 +17,18 @@ class ControllerManager {
     );
   }
 
+  async deleteTechnician(req, res) {
+    const { id } = req.params;
+
+    await connection.query(
+      sql.manager.deleteTechnician(id),
+      (error, results) => {
+        if (error) return responseError(res, error);
+        else responseSuccess(res, `Technician with id ${id} deleted`);
+      }
+    );
+  }
+
   // Admin sample functions
 
   async listAllManagers(req, res) {

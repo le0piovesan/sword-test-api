@@ -9,6 +9,7 @@ routes.get(
   "/manager/getTechnicianTasks/:id",
   ControllerManager.getTechnicianTasks
 );
+routes.delete("/manager/technician/:id", ControllerManager.deleteTechnician);
 
 // Admin sample routes
 routes.post("/manager", ControllerManager.createManager);

@@ -10,6 +10,13 @@ exports.sql = {
       `;
       return query;
     },
+    deleteTechnician(id) {
+      const query = `
+      DELETE FROM technician
+      WHERE id = ${id}
+      `;
+      return query;
+    },
   },
 
   admin: {
