@@ -19,7 +19,9 @@ class ControllerTechnician {
     await connection.query(
       sql.technician.createTask(summary, performed, id),
       (error, results) => {
-        if (error) return responseError(res, error);
+        if (!summary || !performed)
+          return responseError(res, "Field missing", 400);
+        else if (error) return responseError(res, error);
         else responseSuccess(res, `Task created for technician ${id}`, 201);
       }
     );
@@ -32,7 +34,9 @@ class ControllerTechnician {
     await connection.query(
       sql.technician.updateTask(idTechnician, idTask, summary, performed),
       (error, results) => {
-        if (error) return responseError(res, error);
+        if (!summary || !performed)
+          return responseError(res, "Field missing", 400);
+        else if (error) return responseError(res, error);
         else
           responseSuccess(
             res,

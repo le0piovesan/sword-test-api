@@ -13,12 +13,28 @@ beforeAll(async () => {
 describe("GET /manager/:id/getAllTechniciansTasks", () => {
   describe("given the id of a manager", () => {
     test("should return a 200 status code", async () => {
-      const idManager = 3;
+      const idManager = 1;
 
       const response = await request(app).get(
         `/manager/${idManager}/getAllTechniciansTasks`
       );
       expect(response.statusCode).toBe(200);
+      expect(response.headers["content-type"]).toEqual(
+        expect.stringContaining("json")
+      );
+    });
+  });
+  describe("misspeling the route without the id of a manager", () => {
+    test("should return a not found 404 status code", async () => {
+      const idManager = 1;
+
+      const response = await request(app).get(
+        `/manager/getAllTechniciansTasks`
+      );
+      expect(response.statusCode).toBe(404);
+      expect(response.headers["content-type"]).toEqual(
+        expect.stringContaining("html")
+      );
     });
   });
 });
@@ -33,53 +49,11 @@ describe("DELETE /technician/:idTechnician/task/:idTask/deleteTechnicianTask", (
         `/technician/${idTechnician}/task/${idTask}/deleteTechnicianTask`
       );
       expect(response.statusCode).toBe(200);
-    });
-  });
-});
-
-// Technician
-describe("GET /technician/:id/getTasks", () => {
-  describe("given the id of a technician", () => {
-    test("should respond with a 200 status code", async () => {
-      const idTechnician = 2;
-
-      const response = await request(app).get(
-        `/technician/${idTechnician}/getTasks`
+      expect(response.headers["content-type"]).toEqual(
+        expect.stringContaining("json")
       );
-      expect(response.statusCode).toBe(200);
     });
   });
 });
 
-describe("POST /technician/:id/createTask", () => {
-  describe("given the id of a technician, a summary and performed date", () => {
-    test("should respond with a 201 status code", async () => {
-      const idTechnician = 3;
-
-      const response = await request(app)
-        .post(`/technician/${idTechnician}/createTask`)
-        .send({
-          summary: "Deployed the app",
-          performed: "2023-03-05",
-        });
-      expect(response.statusCode).toBe(201);
-    });
-  });
-});
-
-describe("PUT /technician/:idTechnician/task/:idTask/updateTask", () => {
-  describe("given the id of a technician, id of a task, a summary and performed date", () => {
-    test("should respond with a 200 status code", async () => {
-      const idTechnician = 5;
-      const idTask = 7;
-
-      const response = await request(app)
-        .put(`/technician/${idTechnician}/task/${idTask}/updateTask`)
-        .send({
-          summary: "Deployed the app",
-          performed: "2023-03-05",
-        });
-      expect(response.statusCode).toBe(200);
-    });
-  });
-});
+afterAll(() => connection.end());
