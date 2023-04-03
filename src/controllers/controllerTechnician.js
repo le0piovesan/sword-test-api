@@ -20,7 +20,7 @@ class ControllerTechnician {
       sql.technician.createTask(summary, performed, id),
       (error, results) => {
         if (error) return responseError(res, error);
-        else responseSuccess(res, `Task created for technician ${id}`);
+        else responseSuccess(res, `Task created for technician ${id}`, 201);
       }
     );
   }
