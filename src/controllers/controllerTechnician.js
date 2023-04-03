@@ -1,6 +1,11 @@
 const { responseSuccess, responseError } = require("../utils/response");
 const { connection } = require("../configs/mysqlConfig");
 const { sql } = require("../database/sql");
+const { createClient } = require("redis");
+const client = createClient();
+const publisher = client.duplicate();
+
+publisher.connect();
 
 class ControllerTechnician {
   async getTasks(req, res) {
@@ -15,6 +20,7 @@ class ControllerTechnician {
   async createTask(req, res) {
     const { id } = req.params;
     const { summary, performed } = req.body;
+    const notification = `The tech ${id} performed the task ${summary} on date ${performed}`;
 
     await connection.query(
       sql.technician.createTask(summary, performed, id),
@@ -22,7 +28,10 @@ class ControllerTechnician {
         if (!summary || !performed)
           return responseError(res, "Field missing", 400);
         else if (error) return responseError(res, error);
-        else responseSuccess(res, `Task created for technician ${id}`, 201);
+        else {
+          responseSuccess(res, `Task created for technician ${id}`, 201);
+          publisher.publish("managerNotifications", notification);
+        }
       }
     );
   }

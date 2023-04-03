@@ -1,6 +1,16 @@
 const { responseSuccess, responseError } = require("../utils/response");
 const { connection } = require("../configs/mysqlConfig");
 const { sql } = require("../database/sql");
+const { createClient } = require("redis");
+const client = createClient();
+const subscriber = client.duplicate();
+
+subscriber.connect();
+
+// Receives the notification when a technician performs a task
+subscriber.subscribe("managerNotifications", (message) => {
+  console.log(message);
+});
 
 class ControllerManager {
   async getAllTechniciansTasks(req, res) {
