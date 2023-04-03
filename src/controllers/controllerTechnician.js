@@ -20,7 +20,7 @@ class ControllerTechnician {
   async createTask(req, res) {
     const { id } = req.params;
     const { summary, performed } = req.body;
-    const notification = `The tech ${id} performed the task ${summary} on date ${performed}`;
+    const notification = `The tech ${id} performed the task "${summary}" on date ${performed}`;
 
     await connection.query(
       sql.technician.createTask(summary, performed, id),
