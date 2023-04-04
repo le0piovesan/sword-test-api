@@ -2,7 +2,9 @@ const { responseSuccess, responseError } = require("../utils/response");
 const { connection } = require("../configs/mysqlConfig");
 const { sql } = require("../database/sql");
 const { createClient } = require("redis");
-const client = createClient();
+const client = createClient({
+  url: "redis://redis:6379",
+});
 const subscriber = client.duplicate();
 
 subscriber.connect();
