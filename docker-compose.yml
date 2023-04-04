@@ -29,6 +29,30 @@ services:
     networks:
       - sword
 
+  nodeapi:
+    container_name: node_container
+    build: .
+    image: nodeapi:v1
+    volumes:
+      - ${HOME}/nodeapi:/app
+    ports:
+      - 8888:8888
+    expose:
+      - 8888
+    environment:
+      MYSQL_HOST: mysqldb
+      MYSQL_PORT: 3306
+      MYSQL_USER: "admin"
+      MYSQL_PASSWORD: "root"
+      MYSQL_DATABASE: tasksdb
+      SERVICE_TAGS: dev
+      SERVICE_NAME: nodeapiservice
+    depends_on:
+      - redis
+      - mysqldb
+    networks:
+      - sword
+
 networks:
   sword:
     driver: bridge
