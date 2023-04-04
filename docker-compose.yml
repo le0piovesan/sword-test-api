@@ -1,6 +1,6 @@
 services:
   redis:
-    image: redis:latest
+    image: redis/redis-stack-server:latest
     container_name: redis_container
     ports:
       - "6379:6379"
@@ -14,7 +14,7 @@ services:
     restart: unless-stopped
     volumes:
       - ./src/database/init.sql:/docker-entrypoint-initdb.d/0_init.sql
-      - $HOME/database:/var/lib/mysql
+      - ${HOME}/database:/var/lib/mysql
     ports:
       - 3306:3306
     expose:
