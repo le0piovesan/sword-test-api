@@ -1,0 +1,57 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  annotations:
+    kompose.cmd: C:\ProgramData\chocolatey\lib\kubernetes-kompose\tools\kompose.exe convert -f docker-compose.yml -o k8s/
+    kompose.version: 1.28.0 (c4137012e)
+  creationTimestamp: null
+  labels:
+    io.kompose.service: nodeapi
+  name: nodeapi
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      io.kompose.service: nodeapi
+  strategy:
+    type: Recreate
+  template:
+    metadata:
+      annotations:
+        kompose.cmd: C:\ProgramData\chocolatey\lib\kubernetes-kompose\tools\kompose.exe convert -f docker-compose.yml -o k8s/
+        kompose.version: 1.28.0 (c4137012e)
+      creationTimestamp: null
+      labels:
+        io.kompose.network/sword-test-api-sword: "true"
+        io.kompose.service: nodeapi
+    spec:
+      containers:
+        - env:
+            - name: MYSQL_DATABASE
+              value: tasksdb
+            - name: MYSQL_HOST
+              value: mysqldb
+            - name: MYSQL_PASSWORD
+              value: root
+            - name: MYSQL_PORT
+              value: "3306"
+            - name: MYSQL_USER
+              value: admin
+            - name: SERVICE_NAME
+              value: nodeapiservice
+            - name: SERVICE_TAGS
+              value: dev
+          image: nodeapi:v1
+          name: node-container
+          ports:
+            - containerPort: 8888
+          resources: {}
+          volumeMounts:
+            - mountPath: /app
+              name: nodeapi-claim0
+      restartPolicy: Always
+      volumes:
+        - name: nodeapi-claim0
+          persistentVolumeClaim:
+            claimName: nodeapi-claim0
+status: {}
